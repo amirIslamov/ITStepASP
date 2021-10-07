@@ -21,6 +21,7 @@ namespace ASP.NETAuthITStep.Auth
             var jwt = new JwtSecurityToken(
                 notBefore: now,
                 expires: now.AddMilliseconds(_options.TokenLifetime),
+                claims: principal.Claims,
                 signingCredentials: new SigningCredentials(
                     new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SigningKey)),
                     SecurityAlgorithms.HmacSha256

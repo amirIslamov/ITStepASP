@@ -55,7 +55,7 @@ namespace ITStepASP.Auth.Controllers
 
             if (!result.Succeeded)
             {
-                return BadRequest();
+                return BadRequest(result.Errors);
             }
 
             return Ok();
