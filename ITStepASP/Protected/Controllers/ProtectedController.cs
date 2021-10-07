@@ -17,6 +17,7 @@ namespace ITStepASP.Protected.Controllers
             return Ok();
         }
 
+        [HttpGet("extended")]
         [RequirePermissions(Permission.ExtendedAccess)]
         public async Task<IActionResult> GetWithPermissions()
         {
