@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using ASP.NETAuthITStep.Auth.Model;
+using ITStepASP.Auth.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,6 +13,12 @@ namespace ITStepASP.Protected.Controllers
     {
         [HttpGet]
         public async Task<IActionResult> Get()
+        {
+            return Ok();
+        }
+
+        [RequirePermissions(Permission.ExtendedAccess)]
+        public async Task<IActionResult> GetWithPermissions()
         {
             return Ok();
         }
