@@ -1,7 +1,10 @@
 using System.Text;
 using ASP.NETAuthITStep.Auth;
+using ASP.NETAuthITStep.Auth.Model;
 using ASP.NETAuthITStep.Auth.Options;
+using ITStepASP.Auth.Policies.RequirePermissions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -57,6 +60,16 @@ namespace ASP.NETAuthITStep
                     .AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyMethod()));
+
+            services.AddAuthorization(o =>
+            {
+                o.AddPolicy("RequireRestrictedAccess", p =>
+                {
+                    p.Requirements.Add(new RequirePermissions(Permission.ExtendedAccess));
+                });
+            });
+
+            services.AddSingleton<IAuthorizationHandler, RequirePermissionHandler>();
 
             services.AddSwaggerGen(c => 
                 { c.SwaggerDoc("v1", new OpenApiInfo() {Title = "ITStepASP", Version = "v1"}); });

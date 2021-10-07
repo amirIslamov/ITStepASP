@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ASP.NETAuthITStep.Auth;
+using ASP.NETAuthITStep.Auth.Model;
 using ITStepASP.Auth.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -56,6 +57,14 @@ namespace ITStepASP.Auth.Controllers
             if (!result.Succeeded)
             {
                 return BadRequest(result.Errors);
+            }
+
+            if (request.UserName == "admin")
+            {
+                await _userManager.AddClaimAsync(
+                    new IdentityUser(request.UserName),
+                    new Claim(MyClaimTypes.Permissions, Permission.ExtendedAccess.ToString())
+                );
             }
 
             return Ok();
