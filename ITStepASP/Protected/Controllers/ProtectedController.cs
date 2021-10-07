@@ -14,5 +14,12 @@ namespace ITStepASP.Protected.Controllers
         {
             return Ok();
         }
+
+        [HttpGet("protected")]
+        [Authorize("RequireRestrictedAccess")]
+        public async Task<IActionResult> GetWithExtendedAccess()
+        {
+            return Ok();
+        }
     }
 }
