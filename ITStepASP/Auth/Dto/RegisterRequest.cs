@@ -17,5 +17,11 @@ namespace ITStepASP.Auth.Dto
         [MaxLength(16)]
         [Required]
         public string Password { get; set; }
+        
+        [StringLength(8)]
+        [MaxLength(16)]
+        [Required]
+        [Compare("Password")]
+        public string PasswordConfirmation { get; set; }
     }
 }
