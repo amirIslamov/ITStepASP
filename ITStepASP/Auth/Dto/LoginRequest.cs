@@ -8,11 +8,7 @@ namespace ITStepASP.Auth.Dto
         [StringLength(4)]
         [MaxLength(16)]
         public string UserName { get; set; }
-        
-        [EmailAddress]
-        [Required]
-        public string Email { get; set; }
-        
+
         [StringLength(8)]
         [MaxLength(16)]
         [Required]
